@@ -1,45 +1,48 @@
 import React, { useState } from 'react';
 
-const UserInput = () => {
-    const [currentSavings, setCurrentSavings] = useState('');
-    const [yearlySavings, setYearlySavings] = useState('');
-    const [expectedInterest, setExpectedInterest] = useState('');
-    const [investmentDuration, setInvestmentDuration] = useState('');
+const UserInput = (props) => {
+    const [userInputCurrentSavings, setUserInputCurrentSavings] = useState(1000);
+    const [userInputYearlySavings, setUserInputYearlySavings] = useState(1200);
+    const [userInputExpectedInterest, setUserInputExpectedInterest] = useState(7);
+    const [userInputInvestmentDuration, setUserInputInvestmentDuration] = useState(10);
 
     const currentSavingsInputHandler = (e) => {
-        setCurrentSavings(e.target.value);
+        setUserInputCurrentSavings(e.target.value);
     };
 
     const yearlySavingsInputHandler = (e) => {
-        setYearlySavings(e.target.value);
+        setUserInputYearlySavings(e.target.value);
     };
 
     const expectedInterestInputHandler = (e) => {
-        setExpectedInterest(e.target.value);
+        setUserInputExpectedInterest(e.target.value);
     };
 
     const investmentDurationInputHandler = (e) => {
-        setInvestmentDuration(e.target.value);
+        setUserInputInvestmentDuration(e.target.value);
     };
 
     const submitHandler = (event) => {
         event.preventDefault();
 
-        const inputData = {
-            inputCurrentSavings: currentSavings,
-            inputYearlySavings: yearlySavings,
-            inpuEexpectedInterest: expectedInterest,
-            inputInvestmentDuration: investmentDuration,
+        
+
+        const userInputData = {
+            CurrentSavings: userInputCurrentSavings,
+            YearlySavings: userInputYearlySavings,
+            EexpectedInterest: userInputExpectedInterest,
+            InvestmentDuration: userInputInvestmentDuration,
         };
 
-        console.log(inputData);
+        props.onCalculate(userInputData );
+
     };
 
     const resetHandler = () => {
-        setCurrentSavings('');
-        setYearlySavings('');
-        setExpectedInterest('');
-        setInvestmentDuration('');
+        setUserInputCurrentSavings('');
+        setUserInputYearlySavings('');
+        setUserInputExpectedInterest('');
+        setUserInputInvestmentDuration('');
     };
 
     return (
@@ -50,7 +53,7 @@ const UserInput = () => {
                     <input
                         type='number'
                         id='current-savings'
-                        value={currentSavings}
+                        value={userInputCurrentSavings}
                         onChange={currentSavingsInputHandler}
                     />
                 </p>
@@ -59,7 +62,7 @@ const UserInput = () => {
                     <input
                         type='number'
                         id='yearly-contribution'
-                        value={yearlySavings}
+                        value={userInputYearlySavings}
                         onChange={yearlySavingsInputHandler}
                     />
                 </p>
@@ -70,7 +73,7 @@ const UserInput = () => {
                     <input
                         type='number'
                         id='expected-return'
-                        value={expectedInterest}
+                        value={userInputExpectedInterest}
                         onChange={expectedInterestInputHandler}
                     />
                 </p>
@@ -79,7 +82,7 @@ const UserInput = () => {
                     <input
                         type='number'
                         id='duration'
-                        value={investmentDuration}
+                        value={userInputInvestmentDuration}
                         onChange={investmentDurationInputHandler}
                     />
                 </p>
